@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 const Document = require("./Document");
+const dotenv = require('dotenv');
+dotenv.config();
 
+const port = process.env.PORT;
 const LOCAL_DB = 'mongodb://localhost/google-docs-clone';
-const CLOUD_DB = "mongodb+srv://admin:ATLAS@cluster-0.7wvxy.gcp.mongodb.net/google-docs-clone?retryWrites=true&w=majority";
 
-mongoose.connect(CLOUD_DB, {
+mongoose.connect(process.env.CLOUD_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true
-});
+}); 
 
 const _defaultValue = '';
 
-const io = require("socket.io")(3001, {
+const io = require("socket.io")(port, {
     cors: {
         origin: "*",
         methods: ["GET","POST"]
