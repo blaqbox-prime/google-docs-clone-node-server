@@ -82,6 +82,11 @@ app.listen(5000,()=>{
     console.log('API SERVER RUNNING @ http://localhost:5000')
 });
 
+app.get('/',(req,res)=>{
+    res.write('Blaq Box Server Up and Running');
+    res.send();
+})
+
 app.get('/:user/documents', async function(req, res){
     const user = req.params.user;
     const docs = await getMyDocs(user);
